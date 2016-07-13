@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["lauri@kontena.io"]
   spec.summary       = %q{A Ruby client for the Kong API }
   spec.description   = %q{A Ruby client for the Kong API}
-  spec.homepage      = "https://github/kontena/kong-client-ruby"
+  spec.homepage      = "https://github.com/kontena/kong-client-ruby"
   spec.license       = "Apache-2.0"
   spec.files         = `git ls-files -z`.split("\x0")
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
