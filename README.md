@@ -3,7 +3,7 @@
 [Kong](http://getkong.org) API client for Ruby
 
 [![Build Status](https://travis-ci.org/kontena/kong-client-ruby.svg?branch=master)](https://travis-ci.org/kontena/kong-client-ruby)
-
+[![Gem Version](https://badge.fury.io/rb/kong.svg)](https://badge.fury.io/rb/kong)
 ## Installation
 Add this line to your application's Gemfile:
 
