@@ -1,0 +1,360 @@
+AllCops:
+  DisabledByDefault: true
+
+Style/IndentationConsistency:
+  Enabled: true
+  AutoCorrect: true
+
+Style/CommentIndentation:
+  Enabled: true
+  AutoCorrect: true
+
+Style/NestedModifier:
+  Enabled: true
+
+Style/IndentArray:
+  Enabled: true
+
+Style/AlignArray:
+  Enabled: true
+
+Style/AlignHash:
+  Enabled: true
+
+#Lint/EmptyInterpolation:
+#  Enabled: true
+#
+#Lint/Eval:
+#  Enabled: true
+#  Exclude:
+#    - test/**/*
+#
+#Lint/Debugger:
+#  Enabled: true
+#
+#Lint/EmptyEnsure:
+#  Enabled: true
+#
+#Lint/DuplicatedKey:
+#  Enabled: true
+#
+#Lint/UnreachableCode:
+#  Enabled: true
+#
+#Lint/BlockAlignment:
+#  Enabled: true
+#
+#Lint/DefEndAlignment:
+#  Enabled: true
+#
+#Lint/DuplicateMethods:
+#  Enabled: true
+#
+#Lint/AmbiguousOperator:
+#  Enabled: true
+#
+#Lint/ConditionPosition:
+#  Enabled: true
+
+# TODO JMB 2015-12-28: should we include this?
+#Lint/UselessAssignment:
+#  Enabled: true
+
+#Lint/RequireParentheses:
+#  Enabled: true
+#
+#Lint/LiteralInCondition:
+#  Enabled: true
+#
+#Lint/UnusedBlockArgument:
+#  Enabled: true
+#
+#Lint/UnusedMethodArgument:
+#  Enabled: true
+#
+#Lint/UselessAccessModifier:
+#  Enabled: true
+
+# TODO JMB 2015-12-28: needs latest rubocop
+#Lint/IneffectiveAccessModifier:
+#  Enabled: true
+
+#Lint/StringConversionInInterpolation:
+#  Enabled: true
+#
+#Lint/ShadowingOuterLocalVariable:
+#  Enabled: true
+#
+#Rails/Delegate:
+#  Enabled: true
+#
+#Rails/FindBy:
+#  Enabled: true
+#
+#Rails/FindEach:
+#  Enabled: true
+#
+#Rails/Output:
+#  Enabled: true
+#
+#Rails/PluralizationGrammar:
+#  Enabled: true
+#
+#Rails/Validation:
+#  Enabled: true
+#
+#Performance/CaseWhenSplat:
+#  Enabled: true
+#
+#Performance/Count:
+#  Enabled: true
+#
+#Performance/Detect:
+#  Enabled: true
+#
+#Performance/FixedSize:
+#  Enabled: true
+#
+#Performance/FlatMap:
+#  Enabled: true
+#
+#Performance/ReverseEach:
+#  Enabled: true
+#
+#Performance/Sample:
+#  Enabled: true
+#
+#Performance/Size:
+#  Enabled: true
+#
+#Performance/StringReplacement:
+#  Enabled: true
+
+# TODO JMB 2015-12-28: metrics
+
+## Coding Style
+
+Metrics/MethodLength:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#method-length
+  Enabled: true
+  CountComments: false # count full line comments?
+  Max: 40
+  Severity: refactor
+
+Style/Tab:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#tabs
+  Enabled: true
+
+Metrics/ParameterLists:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#parameter-count
+  Enabled: true
+  Severity: refactor
+  Max: 5
+  CountKeywordArgs: true
+
+Style/IndentationWidth:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#tabs
+  Enabled: true
+
+Metrics/LineLength:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#max-line-length
+  Max: 120
+  Enabled: false
+
+Style/TrailingWhitespace:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-trailing-whitespace
+  Enabled: true
+
+Style/TrailingBlankLines:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#end-file-newline
+  EnforcedStyle: final_newline
+
+Style/SpaceAroundOperators:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
+  Enabled: true
+  AllowForAlignment: true
+
+Style/SpaceAroundEqualsInParameterDefault:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
+  EnforcedStyle: space
+
+Style/SpaceAfterComma:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
+  Enabled: true
+
+Style/SpaceAfterColon:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
+  Enabled: true
+
+Style/SpaceAfterSemicolon:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
+  Enabled: true
+
+Style/SpaceBeforeBlockBraces:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
+  Enabled: true
+  EnforcedStyle: space
+
+Style/SpaceInsideBlockBraces:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
+  Enabled: true
+  EnforcedStyle: space
+  # Valid values are: space, no_space
+  EnforcedStyleForEmptyBraces: no_space
+  # Space between { and |. Overrides EnforcedStyle if there is a conflict.
+  SpaceBeforeBlockParameters: true
+
+Style/SpaceInsideHashLiteralBraces:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
+  Enabled: true
+  EnforcedStyle: space
+  EnforcedStyleForEmptyBraces: no_space
+
+Style/SpaceInsideStringInterpolation:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
+  Enabled: true
+  EnforcedStyle: no_space
+
+Style/SpaceInsideParens:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-spaces-around-delimiters
+  Enabled: true
+
+Style/SpaceInsideBrackets:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-spaces-around-delimiters
+  Enabled: true
+
+Style/CaseIndentation:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#case-indentation
+  Enabled: true
+
+Style/ElseAlignment:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#case-indentation
+  Enabled: true
+
+Style/RescueEnsureAlignment:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#case-indentation
+  Enabled: true
+
+Lint/EndAlignment:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#case-indentation
+  Enabled: true
+  AutoCorrect: true
+
+Style/SpaceAfterNot:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-space-after-not
+  Enabled: true
+
+Style/EmptyLineBetweenDefs:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#lines-between-defs
+  Enabled: true
+  AllowAdjacentOneLineDefs: false
+
+## Syntax
+
+Style/MethodDefParentheses:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#method-parentheses
+  Enabled: true
+
+Style/DefWithParentheses:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#method-parentheses
+  Enabled: true
+
+Style/For:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#for-keyword
+  Enabled: true
+
+Style/MultilineIfThen:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#multiline-if-then
+  Enabled: true
+
+Style/NestedTernaryOperator:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#nested-ternary
+  Enabled: true
+
+Style/AndOr:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-and-or-keyword
+  Enabled: true
+
+Style/MultilineTernaryOperator:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#multiline-ternary
+  Enabled: true
+
+Style/UnlessElse:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#unless-else
+  Enabled: true
+
+Style/ParenthesesAroundCondition:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#parens-around-condition
+  Enabled: true
+
+Style/MultilineBlockChain:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#block-syntax
+  Enabled: false
+
+Style/RedundantReturn:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#avoid-return
+  Enabled: true
+
+Style/SpaceAroundEqualsInParameterDefault:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#space-around-param-default
+  Enabled: true
+
+Style/PerlBackrefs:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-perlisms
+  Enabled: true
+
+Style/SpecialGlobalVars:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-perlisms
+  Enabled: true
+
+Style/SpaceAfterMethodName:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-space-after-method-name
+  Enabled: true
+
+Style/VariableName:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#variable-names
+  Enabled: true
+
+Style/ConstantName:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#constant-names
+  Enabled: true
+
+## Classes
+
+Style/ClassVars:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#class-vars
+  Enabled: true
+
+Style/AccessModifierIndentation:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#access-modifier-indent
+  Enabled: true
+
+## Exceptions
+
+Lint/RescueException:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#rescue-specific-exceptions
+  Enabled: true
+
+## Collections
+
+Style/WordArray:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#percent-w
+  Enabled: true
+  MinSize: 3
+
+# Align with the style guide.
+Style/CollectionMethods:
+  # Mapping from undesired method to desired_method
+  # e.g. to use `detect` over `find`:
+  #
+  # CollectionMethods:
+  #   PreferredMethods:
+  #     find: detect
+  Enabled: true
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#banned-aliases
+  PreferredMethods:
+    collect: 'map'
+    collect!: 'map!'
+    inject: 'reduce'
+    detect: 'find'
+    find_all: 'select'
