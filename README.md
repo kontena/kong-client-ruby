@@ -7,7 +7,7 @@
 ## Installation
 Add this line to your application's Gemfile:
 
-    gem 'kong-client'
+    gem 'kong'
 
 And then execute:
 
@@ -15,7 +15,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install kong-client
+    $ gem install kong
 
 ## Usage
 
