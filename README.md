@@ -199,6 +199,8 @@ token.create
 token.update
 token.save # requests create_or_update action
 token.delete
+
+token.oauth_app
 ```
 
 ## Contributing
