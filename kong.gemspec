@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'kong/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "kong-client"
+  spec.name          = "kong"
   spec.version       = Kong::VERSION
   spec.authors       = ["Lauri Nevala"]
   spec.email         = ["lauri@kontena.io"]
