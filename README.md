@@ -167,7 +167,7 @@ auth.delete
 #### BasicAuth
 
 ```ruby
-Kong::KeyAuth.create(attributes)
+Kong::BasicAuth.create(attributes)
 
 auth = Kong::BasicAuth.new({  
   consumer_id: 'a3dX2dh2-1adb-40a5-c042-63b19dbx83hF4',
