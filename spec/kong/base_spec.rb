@@ -46,6 +46,20 @@ describe Kong::Base do
     end
   end
 
+  describe '.respond_to' do
+    context 'when attribute exits' do
+      it 'will respond to find_by_* methods' do
+        expect(Klass.respond_to?(:find_by_name)).to be_truthy
+      end
+    end
+
+    context 'when attribute does not exit' do
+      it 'will not respond to find_by_* methods' do
+        expect(Klass.respond_to?(:find_by_invalid)).to be_falsey
+      end
+    end
+  end
+
   describe '#get' do
     it 'creates GET /:resource_end_point/:id request' do
       expect(Kong::Client.instance).to receive(:get).with('/resources/12345').and_return({ data: [] })

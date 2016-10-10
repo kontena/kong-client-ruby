@@ -41,6 +41,19 @@ module Kong
           super
         end
       end
+
+      def respond_to?(method, include_private = false)
+        if method.to_s.start_with?('find_by_')
+          attribute = method.to_s.sub('find_by_', '')
+          if self.attribute_names.include?(attribute)
+            return true
+          else
+            super
+          end          
+        else
+          super
+        end
+      end
     end
 
     attr_accessor :attributes, :api_end_point
