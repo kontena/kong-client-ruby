@@ -67,5 +67,18 @@ module Kong
     def oauth2_tokens
       OAuth2Token.list({ authenticated_userid: self.custom_id })
     end
+
+    # List JWTs
+    #
+    # @return [Array<Kong::JWT>]
+    def jwts  apps = []
+      response = client.get("#{@api_end_point}#{self.username}/jwt") rescue nil
+      if response
+        response['data'].each do |attributes|
+          apps << Kong::JWT.new(attributes)
+        end
+      end
+      apps
+    end
   end
 end
