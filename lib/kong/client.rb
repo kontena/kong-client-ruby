@@ -20,18 +20,19 @@ module Kong
     end
 
     def self.api_url
-      self.instance.api_url
+      @api_url
     end
 
     def self.api_url=(url)
-      self.instance.api_url = url
+      @api_url = url
     end
 
     # Kong Admin API URL
     #
     # @return [String]
-    def api_url      
-      @api_url ||= ENV['KONG_URI'] || 'http://localhost:8001'
+    def api_url
+      @api_url ||=
+        self.class.api_url || ENV['KONG_URI'] || 'http://localhost:8001'
     end
 
     def api_url=(url)

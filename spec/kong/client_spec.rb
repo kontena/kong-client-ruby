@@ -12,6 +12,7 @@ describe Kong::Client do
 
   describe '#initialize' do
     it 'initializes Excon with Kong URI' do
+      described_class.api_url = nil
       expect(Excon).to receive(:new).with('http://localhost:8001', { omit_default_port: true })
       described_class.send(:new)
     end
@@ -24,6 +25,7 @@ describe Kong::Client do
 
   describe '#api_url' do
     it 'returns localhost as default' do
+      described_class.api_url = nil
       expect(subject.api_url).to eq('http://localhost:8001')
     end
 
@@ -32,8 +34,15 @@ describe Kong::Client do
       allow(ENV).to receive(:[]).with('no_proxy')
       allow(ENV).to receive(:[]).with('SSL_IGNORE_ERRORS')
       allow(ENV).to receive(:[]).with('KONG_URI').and_return('http://kong-api:8001')
+      described_class.api_url = nil
       subject = described_class.send(:new)
       expect(subject.api_url).to eq('http://kong-api:8001')
+    end
+
+    it 'returns custom api_url if set' do
+      url = 'http://foo.bar:1337'
+      described_class.api_url = url
+      expect(described_class.send(:new).api_url).to eq(url)
     end
   end
 
