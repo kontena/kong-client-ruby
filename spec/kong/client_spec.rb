@@ -24,6 +24,20 @@ describe Kong::Client do
   end
 
   describe '#api_url' do
+
+    def client_params
+      uri = URI.parse described_class.api_url
+      params = {
+        host: uri.host,
+        hostname: uri.hostname,
+        path: uri.path,
+        port: uri.port,
+        query: uri.query,
+        scheme: uri.scheme
+      }
+      described_class.instance.http_client.params.merge(params)
+    end
+
     it 'returns localhost as default' do
       described_class.api_url = nil
       expect(subject.api_url).to eq('http://localhost:8001')
@@ -43,6 +57,13 @@ describe Kong::Client do
       url = 'http://foo.bar:1337'
       described_class.api_url = url
       expect(described_class.send(:new).api_url).to eq(url)
+    end
+
+    it 'can edit api_url' do
+      described_class.api_url = nil
+      expect(described_class.instance.http_client.params).to eq(client_params)
+      described_class.api_url = 'http://foo.bar:1337'
+      expect(described_class.instance.http_client.params).to eq(client_params)
     end
   end
 
