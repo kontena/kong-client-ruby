@@ -52,4 +52,21 @@ describe Kong::Consumer do
       end
     end
   end
+
+  describe '#acls' do
+    it 'requests consumer\'s acls' do
+      subject.username = ':username'
+      expect(Kong::Client.instance).to receive(:get).with("/consumers/:username/acls")
+        .and_return({ 'data' => [{ 'id' => '123456', 'group' => 'group1' }] })
+      subject.acls
+    end
+
+    it 'returns list of Acls' do
+      subject.username = ':username'
+      allow(Kong::Client.instance).to receive(:get).with("/consumers/:username/acls")
+        .and_return({ 'data' => [{ 'id' => '123456', 'group' => 'group1' }] })
+      result = subject.acls
+      expect(result.first.is_a?(Kong::Acl)).to be_truthy
+    end
+  end
 end
