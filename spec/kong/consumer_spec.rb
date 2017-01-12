@@ -35,10 +35,21 @@ describe Kong::Consumer do
   end
 
   describe '#oauth2_tokens' do
-    it 'requests oauth2_tokens assigned to consumer' do
-      subject.custom_id = 'custom_id'
-      expect(Kong::OAuth2Token).to receive(:list).with({ authenticated_userid: subject.custom_id })
-      subject.oauth2_tokens
+    context 'when custom_id is set' do
+      it 'requests oauth2_tokens assigned to consumer' do
+        subject.custom_id = 'custom_id'
+        expect(Kong::OAuth2Token).to receive(:list).with({ authenticated_userid: subject.custom_id })
+        subject.oauth2_tokens
+      end
+    end
+    context 'when custom_id is not set' do
+      it 'requests oauth2_tokens assigned to consumer' do
+        expect(Kong::OAuth2Token).not_to receive(:list)
+        subject.oauth2_tokens
+      end
+      it 'returns empty array' do
+        expect(subject.oauth2_tokens).to eq([])
+      end
     end
   end
 end
