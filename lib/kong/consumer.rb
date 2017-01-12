@@ -65,7 +65,11 @@ module Kong
     #
     # @return [Array<Kong::OAuth2Token>]
     def oauth2_tokens
-      OAuth2Token.list({ authenticated_userid: self.custom_id })
+      if self.custom_id
+        OAuth2Token.list({ authenticated_userid: self.custom_id })
+      else
+        []
+      end
     end
 
     # List JWTs
