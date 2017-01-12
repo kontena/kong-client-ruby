@@ -4,6 +4,7 @@
 
 [![Build Status](https://travis-ci.org/kontena/kong-client-ruby.svg?branch=master)](https://travis-ci.org/kontena/kong-client-ruby)
 [![Gem Version](https://badge.fury.io/rb/kong.svg)](https://badge.fury.io/rb/kong)
+
 ## Installation
 Add this line to your application's Gemfile:
 
@@ -27,7 +28,7 @@ require 'kong'
 Kong::Client.api_url = 'http://your-kong-url:8001'
 ```
 
-### Desing
+### Design
 
 Kong client follows a design of resoures as Plain Old Ruby objects(tm). For examples to create a new Consumer resource you can do it like this:
 
@@ -201,6 +202,25 @@ token.save # requests create_or_update action
 token.delete
 
 token.oauth_app
+```
+
+#### JWT
+
+```ruby
+
+jwt = Kong::JWT.new({  
+  consumer_id: 'a3dX2dh2-1adb-40a5-c042-63b19dbx83hF4',
+  key: 'a36c3049b36249a3c9f8891cb127243c',
+  secret: 'e71829c351aa4242c2719cbfbe671c09'
+})
+
+jwt.create
+jwt.update
+jwt.save # requests create_or_update action
+jwt.delete
+
+consumer = Kong::Consumer.find_by_username('testuser')
+consumer.jwts
 ```
 
 #### ACL
