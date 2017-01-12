@@ -5,34 +5,41 @@ require_relative './error'
 
 module Kong
   class Client
+    class << self
+      attr_accessor :http_client
+    end
+
     include Singleton
 
     attr_accessor :default_headers
-    attr_reader :http_client
 
     # Initialize api client
     #
     def initialize
       Excon.defaults[:ssl_verify_peer] = false if ignore_ssl_errors?
       @api_url = api_url
-      @http_client = Excon.new(@api_url, omit_default_port: true)
+      self.class.http_client = Excon.new(@api_url, omit_default_port: true)
       @default_headers = { 'Accept' => 'application/json' }
     end
 
     def self.api_url
-      @api_url
+      @api_url || ENV['KONG_URI'] || 'http://localhost:8001'
     end
 
     def self.api_url=(url)
       @api_url = url
+      @http_client = Excon.new(self.api_url, omit_default_port: true)
+    end
+
+    def http_client
+      self.class.http_client
     end
 
     # Kong Admin API URL
     #
     # @return [String]
     def api_url
-      @api_url ||=
-        self.class.api_url || ENV['KONG_URI'] || 'http://localhost:8001'
+      self.class.api_url
     end
 
     def api_url=(url)
