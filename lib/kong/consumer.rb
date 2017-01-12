@@ -72,6 +72,20 @@ module Kong
       end
     end
 
+    # List Acls
+    #
+    # @return [Array<Kong::Acl>]
+    def acls
+      acls = []
+      response = client.get("#{@api_end_point}#{self.username}/acls") rescue nil
+      if response
+        response['data'].each do |attributes|
+          acls << Kong::Acl.new(attributes)
+        end
+      end
+      acls
+    end
+
     # List JWTs
     #
     # @return [Array<Kong::JWT>]

@@ -203,6 +203,24 @@ token.delete
 token.oauth_app
 ```
 
+#### ACL
+
+```ruby
+
+acl = Kong::Acl.new({  
+  consumer_id: 'a3dX2dh2-1adb-40a5-c042-63b19dbx83hF4',
+  group: 'group1'
+})
+
+acl.create
+acl.update
+acl.save # requests create_or_update action
+acl.delete
+
+consumer = Kong::Consumer.find_by_username('testuser')
+consumer.acls
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/kontena/kong-client-ruby/fork )
