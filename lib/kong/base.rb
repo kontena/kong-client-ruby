@@ -49,7 +49,7 @@ module Kong
             return true
           else
             super
-          end          
+          end
         else
           super
         end

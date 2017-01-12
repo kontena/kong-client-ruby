@@ -71,7 +71,8 @@ module Kong
     # List JWTs
     #
     # @return [Array<Kong::JWT>]
-    def jwts  apps = []
+    def jwts
+      apps = []
       response = client.get("#{@api_end_point}#{self.username}/jwt") rescue nil
       if response
         response['data'].each do |attributes|
