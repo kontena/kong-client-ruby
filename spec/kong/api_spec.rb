@@ -2,7 +2,7 @@ require_relative "../spec_helper"
 
 describe Kong::Api do
   let(:valid_attribute_names) do
-    %w(id name request_host request_path strip_request_path preserve_host upstream_url)
+    %w(id name request_host request_path strip_request_path hosts uris strip_uri preserve_host upstream_url)
   end
 
   describe 'ATTRIBUTE_NAMES' do
