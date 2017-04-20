@@ -241,6 +241,16 @@ consumer = Kong::Consumer.find_by_username('testuser')
 consumer.acls
 ```
 
+#### Server Information
+
+```ruby
+Kong::Server.info
+Kong::Server.version
+Kong::Server.status
+Kong::Server.cluster
+Kong::Server.remove_node(node_name)
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/kontena/kong-client-ruby/fork )
