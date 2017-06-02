@@ -88,7 +88,7 @@ Kong::Api.create(attributes)
 api = Kong::Api.new({
   name: 'Mockbin',
   request_host: 'mockbin.com',
-  request_path: '/someservice',
+  uris: ['/someservice'],
   strip_request_path: false,
   preserve_host: false,
   upstream_url: 'https://mockbin.com'
