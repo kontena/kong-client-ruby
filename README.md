@@ -88,7 +88,7 @@ Kong::Api.create(attributes)
 api = Kong::Api.new({
   name: 'Mockbin',
   request_host: 'mockbin.com',
-  request_path: '/someservice',
+  uris: ['/someservice'],
   strip_request_path: false,
   preserve_host: false,
   upstream_url: 'https://mockbin.com'
@@ -118,7 +118,7 @@ plugin = Kong::Plugin.new({
   config: {
     minute: 20,
     hour: 500
-  }  
+  }
 })
 
 plugin.get # reloads resource
@@ -126,6 +126,36 @@ plugin.create
 plugin.update
 plugin.save # requests create_or_update action
 plugin.delete
+```
+
+#### Upstream and Targets (for load-balanced APIs)
+
+```
+Kong::Upstream.list(filters)
+Kong::Upstream.all()
+Kong::Upstream.find(id)
+Kong::Upstream.find_by_*(value)
+Kong::Upstream.create(attributes)
+
+upstream = Kong::Upstream.new({ name: 'myservice' })
+
+upstream.get # reloads resource
+upstream.create
+upstream.update
+upstream.save # requests create_or_update action
+upstream.delete
+
+upstream.targets # lists active targets
+
+# Add targets
+Kong::Target.new({ upstream_id: upstream.id, target: 'appserver1:80' }).save
+Kong::Target.new({ upstream_id: upstream.id, target: 'appserver2:80' }).save
+
+# Add the API
+Kong::Api.new({
+  ...
+  upstream_url: 'http://myservice'
+}).save
 ```
 
 #### OAuthApp
@@ -137,8 +167,8 @@ Kong::OAuthApp.find(consumer_id)
 Kong::OAuthApp.find_by_*(value)
 Kong::OAuthApp.create(attributes)
 
-app = Kong::OAuthApp.new({  
-  consumer_id: 'a3dX2dh2-1adb-40a5-c042-63b19dbx83hF4',  
+app = Kong::OAuthApp.new({
+  consumer_id: 'a3dX2dh2-1adb-40a5-c042-63b19dbx83hF4',
   redirect_uri: 'http://some-domain/endpoint/'
 })
 
@@ -154,8 +184,8 @@ app.delete
 ```ruby
 Kong::KeyAuth.create(attributes)
 
-auth = Kong::KeyAuth.new({  
-  consumer_id: 'a3dX2dh2-1adb-40a5-c042-63b19dbx83hF4',    
+auth = Kong::KeyAuth.new({
+  consumer_id: 'a3dX2dh2-1adb-40a5-c042-63b19dbx83hF4',
 })
 
 auth.create
@@ -170,7 +200,7 @@ auth.delete
 ```ruby
 Kong::BasicAuth.create(attributes)
 
-auth = Kong::BasicAuth.new({  
+auth = Kong::BasicAuth.new({
   consumer_id: 'a3dX2dh2-1adb-40a5-c042-63b19dbx83hF4',
   username: 'user123',
   password: 'secret'
@@ -188,7 +218,7 @@ auth.delete
 ```ruby
 token = Kong::OAuth2Token.find_by_access_token('SOME-TOKEN')
 
-token = Kong::OAuth2Token.new({  
+token = Kong::OAuth2Token.new({
   credential_id: 'KONG-APPLICATION-ID',
   token_type: 'bearer',
   access_token: 'SOME-TOKEN',
@@ -208,7 +238,7 @@ token.oauth_app
 
 ```ruby
 
-jwt = Kong::JWT.new({  
+jwt = Kong::JWT.new({
   consumer_id: 'a3dX2dh2-1adb-40a5-c042-63b19dbx83hF4',
   key: 'a36c3049b36249a3c9f8891cb127243c',
   secret: 'e71829c351aa4242c2719cbfbe671c09'
@@ -227,7 +257,7 @@ consumer.jwts
 
 ```ruby
 
-acl = Kong::Acl.new({  
+acl = Kong::Acl.new({
   consumer_id: 'a3dX2dh2-1adb-40a5-c042-63b19dbx83hF4',
   group: 'group1'
 })
