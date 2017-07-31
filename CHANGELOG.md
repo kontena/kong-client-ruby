@@ -1,3 +1,6 @@
+# 0.3.0 (2017-07-31)
+- Add support for Upstream and Target resources ([#15](https://github.com/kontena/kong-client-ruby/pull/15))
+
 # 0.2.0 (2017-04-20)
 - Add Server information support ([#14](https://github.com/kontena/kong-client-ruby/pull/14))
 - Add optional attributes to Api
