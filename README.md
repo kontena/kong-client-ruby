@@ -132,7 +132,7 @@ plugin.delete
 
 #### Upstream and Targets (for load-balanced APIs)
 
-```
+```ruby
 Kong::Upstream.list(filters)
 Kong::Upstream.all()
 Kong::Upstream.find(id)
