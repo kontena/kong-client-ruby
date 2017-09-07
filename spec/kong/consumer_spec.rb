@@ -19,15 +19,15 @@ describe Kong::Consumer do
 
   describe '#oauth_apps' do
     it 'requests consumer\'s oauth_apps' do
-      subject.username = ':username'
-      expect(Kong::Client.instance).to receive(:get).with("/consumers/:username/oauth2")
+      subject.id = ':id'
+      expect(Kong::Client.instance).to receive(:get).with("/consumers/:id/oauth2")
         .and_return({ 'data' => [{ 'id' => '123456', 'name' => 'my app' }] })
       subject.oauth_apps
     end
 
     it 'returns list of OAuthApp' do
-      subject.username = ':username'
-      allow(Kong::Client.instance).to receive(:get).with("/consumers/:username/oauth2")
+      subject.id = ':id'
+      allow(Kong::Client.instance).to receive(:get).with("/consumers/:id/oauth2")
         .and_return({ 'data' => [{ 'id' => '123456', 'name' => 'my app' }] })
       result = subject.oauth_apps
       expect(result.first.is_a?(Kong::OAuthApp)).to be_truthy
@@ -55,15 +55,15 @@ describe Kong::Consumer do
 
   describe '#acls' do
     it 'requests consumer\'s acls' do
-      subject.username = ':username'
-      expect(Kong::Client.instance).to receive(:get).with("/consumers/:username/acls")
+      subject.id = ':id'
+      expect(Kong::Client.instance).to receive(:get).with("/consumers/:id/acls")
         .and_return({ 'data' => [{ 'id' => '123456', 'group' => 'group1' }] })
       subject.acls
     end
 
     it 'returns list of Acls' do
-      subject.username = ':username'
-      allow(Kong::Client.instance).to receive(:get).with("/consumers/:username/acls")
+      subject.id = ':id'
+      allow(Kong::Client.instance).to receive(:get).with("/consumers/:id/acls")
         .and_return({ 'data' => [{ 'id' => '123456', 'group' => 'group1' }] })
       result = subject.acls
       expect(result.first.is_a?(Kong::Acl)).to be_truthy

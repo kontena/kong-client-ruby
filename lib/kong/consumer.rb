@@ -24,7 +24,7 @@ module Kong
     # @return [Array<Kong::OAuthApp>]
     def oauth_apps
       apps = []
-      response = client.get("#{@api_end_point}#{self.username}/oauth2") rescue nil
+      response = client.get("#{@api_end_point}#{self.id}/oauth2") rescue nil
       if response
         response['data'].each do |attributes|
           apps << Kong::OAuthApp.new(attributes)
@@ -38,7 +38,7 @@ module Kong
     # @return [Array<Kong::KeyAuth]
     def basic_auths
       apps = []
-      response = client.get("#{@api_end_point}#{self.username}/basic-auth") rescue nil
+      response = client.get("#{@api_end_point}#{self.id}/basic-auth") rescue nil
       if response
         response['data'].each do |attributes|
           apps << Kong::BasicAuth.new(attributes)
@@ -52,7 +52,7 @@ module Kong
     # @return [Array<Kong::KeyAuth]
     def key_auths
       apps = []
-      response = client.get("#{@api_end_point}#{self.username}/key-auth") rescue nil
+      response = client.get("#{@api_end_point}#{self.id}/key-auth") rescue nil
       if response
         response['data'].each do |attributes|
           apps << Kong::KeyAuth.new(attributes)
@@ -77,7 +77,7 @@ module Kong
     # @return [Array<Kong::Acl>]
     def acls
       acls = []
-      response = client.get("#{@api_end_point}#{self.username}/acls") rescue nil
+      response = client.get("#{@api_end_point}#{self.id}/acls") rescue nil
       if response
         response['data'].each do |attributes|
           acls << Kong::Acl.new(attributes)
@@ -91,7 +91,7 @@ module Kong
     # @return [Array<Kong::JWT>]
     def jwts
       apps = []
-      response = client.get("#{@api_end_point}#{self.username}/jwt") rescue nil
+      response = client.get("#{@api_end_point}#{self.id}/jwt") rescue nil
       if response
         response['data'].each do |attributes|
           apps << Kong::JWT.new(attributes)
