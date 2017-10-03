@@ -1,4 +1,4 @@
-# 0.3.1 (2017-01-02)
+# 0.3.1 (2017-10-02)
 - Use consumer id to retrieve auth keys and tokens ([#19](https://github.com/kontena/kong-client-ruby/pull/19))
 - Add methods to kong api base attributes ([#21](https://github.com/kontena/kong-client-ruby/pull/21))
 # 0.3.0 (2017-07-31)
