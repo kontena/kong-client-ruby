@@ -6,7 +6,7 @@ describe Kong::Api do
       id name request_host request_path strip_request_path
       hosts uris strip_uri preserve_host upstream_url retries
       upstream_connect_timeout upstream_send_timeout upstream_read_timeout
-      https_only http_if_terminated
+      https_only http_if_terminated methods
     )
   end
 
