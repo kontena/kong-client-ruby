@@ -53,7 +53,7 @@ consumer = Kong::Consumer.find_by_custom_id('custom_id')
 
 ### All Resources and Actions
 
-To see the complete Kong Admin API documentation, please visit: https://getkong.org/docs/0.10.x/admin-api/
+To see the complete Kong Admin API documentation, please visit: https://getkong.org/docs/0.11.x/admin-api/
 
 #### Consumer
 
@@ -91,6 +91,7 @@ api = Kong::Api.new({
   name: 'Mockbin',
   hosts: ['mockbin.com'],
   uris: ['/someservice'],
+  methods: ['GET']
   strip_uri: false,
   preserve_host: false,
   upstream_url: 'https://mockbin.com'
