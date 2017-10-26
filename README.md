@@ -89,7 +89,7 @@ Kong::Api.create(attributes)
 
 api = Kong::Api.new({
   name: 'Mockbin',
-  hosts: ['mockbin.com'],
+  hosts: ['example.com'],
   uris: ['/someservice'],
   methods: ['GET']
   strip_uri: false,
