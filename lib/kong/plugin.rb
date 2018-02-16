@@ -8,24 +8,24 @@ module Kong
 
     # Create resource
     def create
-      if attributes['config']
-        attributes['config'].each do |key, value|
-          attributes["config.#{key}"] = value
-        end
-        attributes.delete('config')
-      end
+      transform_config_attributes!
       super
     end
 
     # update resource
     def update
-      if attributes['config']
-        attributes['config'].each do |key, value|
-          attributes["config.#{key}"] = value
-        end
-        attributes.delete('config')
-      end
+      transform_config_attributes!
       super
+    end
+
+    protected
+
+    def transform_config_attributes!
+      return unless attributes['config']
+      attributes['config'].each do |key, value|
+        attributes["config.#{key}"] = value
+      end
+      attributes.delete('config')
     end
   end
 end

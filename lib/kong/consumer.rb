@@ -16,49 +16,28 @@ module Kong
     #
     # @return [Array<Kong::Plugin>]
     def plugins
-      Plugin.list({ consumer_id: self.id })
+      Plugin.list({ consumer_id: self.id }, client: self.client)
     end
 
     # List OAuth applications
     #
     # @return [Array<Kong::OAuthApp>]
     def oauth_apps
-      apps = []
-      response = client.get("#{@api_end_point}#{self.id}/oauth2") rescue nil
-      if response
-        response['data'].each do |attributes|
-          apps << Kong::OAuthApp.new(attributes)
-        end
-      end
-      apps
+      Collection.new(OAuthApp, self.client, "#{@api_end_point}#{self.id}/oauth2").all
     end
 
     # List KeyAuth credentials
     #
     # @return [Array<Kong::KeyAuth]
     def basic_auths
-      apps = []
-      response = client.get("#{@api_end_point}#{self.id}/basic-auth") rescue nil
-      if response
-        response['data'].each do |attributes|
-          apps << Kong::BasicAuth.new(attributes)
-        end
-      end
-      apps
+      Collection.new(BasicAuth, self.client, "#{@api_end_point}#{self.id}/basic-auth").all
     end
 
     # List KeyAuth credentials
     #
     # @return [Array<Kong::KeyAuth]
     def key_auths
-      apps = []
-      response = client.get("#{@api_end_point}#{self.id}/key-auth") rescue nil
-      if response
-        response['data'].each do |attributes|
-          apps << Kong::KeyAuth.new(attributes)
-        end
-      end
-      apps
+      Collection.new(KeyAuth, self.client, "#{@api_end_point}#{self.id}/key-auth").all
     end
 
     # List OAuth2Tokens
@@ -66,7 +45,7 @@ module Kong
     # @return [Array<Kong::OAuth2Token>]
     def oauth2_tokens
       if self.custom_id
-        OAuth2Token.list({ authenticated_userid: self.custom_id })
+        OAuth2Token.list({ authenticated_userid: self.custom_id }, client: self.client)
       else
         []
       end
@@ -76,28 +55,14 @@ module Kong
     #
     # @return [Array<Kong::Acl>]
     def acls
-      acls = []
-      response = client.get("#{@api_end_point}#{self.id}/acls") rescue nil
-      if response
-        response['data'].each do |attributes|
-          acls << Kong::Acl.new(attributes)
-        end
-      end
-      acls
+      Collection.new(Acl, self.client, "#{@api_end_point}#{self.id}/acls").all
     end
 
     # List JWTs
     #
     # @return [Array<Kong::JWT>]
     def jwts
-      apps = []
-      response = client.get("#{@api_end_point}#{self.id}/jwt") rescue nil
-      if response
-        response['data'].each do |attributes|
-          apps << Kong::JWT.new(attributes)
-        end
-      end
-      apps
+      Collection.new(JWT, self.client, "#{@api_end_point}#{self.id}/jwt").all
     end
   end
 end

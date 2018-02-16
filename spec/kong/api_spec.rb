@@ -25,7 +25,7 @@ describe Kong::Api do
   describe '.plugins' do
     it 'requests plugins attached to Api' do
       subject.id = '12345'
-      expect(Kong::Plugin).to receive(:list).with({ api_id: subject.id })
+      expect(Kong::Plugin).to receive(:list).with({ api_id: subject.id }, { client: Kong::Client.instance })
       subject.plugins
     end
   end

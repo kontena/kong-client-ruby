@@ -36,7 +36,7 @@ describe Kong::Target do
 
   describe '.upstream' do
     it 'requests the attached Upstream' do
-      expect(Kong::Upstream).to receive(:find).with(upstream_id)
+      expect(Kong::Upstream).to receive(:find).with(upstream_id, { client: Kong::Client.instance })
       subject.upstream
     end
   end

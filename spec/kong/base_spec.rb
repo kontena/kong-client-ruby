@@ -34,8 +34,9 @@ describe Kong::Base do
   end
 
   describe '.all' do
-    it 'is alias of .list' do
-      expect(Klass.method(:list)).to eq(Klass.method(:all))
+    it 'calls .list with size option' do
+      expect(Kong::Client.instance).to receive(:get).with('/resources/', {size: 9999999}).and_return({ data: [] })
+      Klass.all
     end
   end
 
@@ -56,6 +57,31 @@ describe Kong::Base do
     context 'when attribute does not exit' do
       it 'will not respond to find_by_* methods' do
         expect(Klass.respond_to?(:find_by_invalid)).to be_falsey
+      end
+    end
+  end
+
+  describe '#initialize' do
+    it 'initializes client object with shared Client' do
+      instance = Klass.new
+      expect(instance.client).to eq(Kong::Client.instance)
+    end
+
+    it 'initializes collection object' do
+      instance = Klass.new
+      expect(instance.collection.is_a?(Kong::Collection)).to be_truthy
+    end
+
+    context 'with opts' do
+      it 'uses given Client instance' do
+        instance = Klass.new({}, {client: Kong::Client.new('http://kong-api:8001')})
+        expect(instance.client.api_url).to eq('http://kong-api:8001')
+      end
+
+      it 'uses given Collection instance' do
+        consumer_collection = Kong::Collection.new(Kong::Consumer, Kong::Client.new('http://kong-api:8001'))
+        instance = Klass.new({}, {collection: consumer_collection})
+        expect(instance.collection).to eq(consumer_collection)
       end
     end
   end

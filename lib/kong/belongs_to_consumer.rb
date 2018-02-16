@@ -10,7 +10,7 @@ module Kong
     # Get Consumer resource
     # @return [Kong::Consumer]
     def consumer
-      @consumer ||= Consumer.find(self.consumer_id)
+      @consumer ||= Consumer.find(self.consumer_id, client: self.client)
     end
 
     # Set Consumer resource

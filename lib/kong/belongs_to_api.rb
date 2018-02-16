@@ -10,7 +10,7 @@ module Kong
     # Get Api resource
     # @return [Kong::Api]
     def api
-      @api ||= Api.find(self.api_id)
+      @api ||= Api.find(self.api_id, client: self.client)
     end
 
     # Set Api resource

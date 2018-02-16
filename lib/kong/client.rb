@@ -1,25 +1,25 @@
-require 'singleton'
+
 require 'json'
 require 'excon'
 require_relative './error'
 
 module Kong
   class Client
-    class << self
-      attr_accessor :http_client
-    end
 
-    include Singleton
-
-    attr_accessor :default_headers
+    attr_accessor :default_headers, :http_client, :api_url
 
     # Initialize api client
     #
-    def initialize
+    def initialize(url = nil)
       Excon.defaults[:ssl_verify_peer] = false if ignore_ssl_errors?
-      @api_url = api_url
-      self.class.http_client = Excon.new(@api_url, omit_default_port: true)
+      if url
+        @api_url = url
+      else
+        @api_url = self.class.api_url
+      end
+      @http_client = Excon.new(@api_url, omit_default_port: true)
       @default_headers = { 'Accept' => 'application/json' }
+      @collections = {}
     end
 
     def self.api_url
@@ -28,22 +28,55 @@ module Kong
 
     def self.api_url=(url)
       @api_url = url
-      @http_client = Excon.new(self.api_url, omit_default_port: true)
+      @instance = self.new
     end
 
-    def http_client
-      self.class.http_client
+    def self.instance
+      @instance ||= self.new
     end
 
-    # Kong Admin API URL
-    #
-    # @return [String]
-    def api_url
-      self.class.api_url
+    def consumers
+      collection(Consumer)
     end
 
-    def api_url=(url)
-      @api_url = url
+    def apis
+      collection(Api)
+    end
+
+    def oauth_apps
+      collection(OAuthApp)
+    end
+
+    def oauth2_tokens
+      collection(OAuth2Token)
+    end
+
+    def plugins
+      collection(Plugin)
+    end
+
+    def targets
+      collection(Target)
+    end
+
+    def info
+      get('/')
+    end
+
+    def status
+      get('/status')
+    end
+
+    def cluster
+      get('/cluster')
+    end
+
+    def version
+      self.info['version'] rescue nil
+    end
+
+    def remove_node(name)
+      delete("/cluster/nodes/#{name}")
     end
 
 
@@ -160,6 +193,10 @@ module Kong
     end
 
     private
+
+    def collection(klass)
+      @collections[klass.name] || @collections[klass.name] = Collection.new(klass, self)
+    end
 
     ##
     # Get request headers

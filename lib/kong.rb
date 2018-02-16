@@ -1,5 +1,7 @@
 require 'kong/version'
 require_relative 'kong/base'
+require_relative 'kong/rootless'
+require_relative 'kong/collection'
 require_relative 'kong/api'
 require_relative 'kong/belongs_to_api'
 require_relative 'kong/client'

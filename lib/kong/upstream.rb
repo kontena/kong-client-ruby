@@ -9,7 +9,7 @@ module Kong
     # @return [Array<Kong::Target>]
     def targets
       targets   = []
-      json_data = Client.instance.get("#{API_END_POINT}#{self.id}/targets")
+      json_data = self.client.get("#{API_END_POINT}#{self.id}/targets")
 
       if json_data['data']
         json_data['data'].each do |target_data|

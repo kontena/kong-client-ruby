@@ -8,7 +8,7 @@ module Kong
     # Get OAuthApp resource
     # @return [Kong::OAuthApp]
     def oauth_app
-      Kong::OAuthApp.find_by_id(self.credential_id)
+      Kong::OAuthApp.find_by_id(self.credential_id, client: self.client)
     end
   end
 end
