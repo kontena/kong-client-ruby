@@ -20,14 +20,14 @@ describe Kong::Consumer do
   describe '#oauth_apps' do
     it 'requests consumer\'s oauth_apps' do
       subject.id = ':id'
-      expect(Kong::Client.instance).to receive(:get).with("/consumers/:id/oauth2")
+      expect(Kong::Client.instance).to receive(:get).with("/consumers/:id/oauth2", { size: 9999999 })
         .and_return({ 'data' => [{ 'id' => '123456', 'name' => 'my app' }] })
       subject.oauth_apps
     end
 
     it 'returns list of OAuthApp' do
       subject.id = ':id'
-      allow(Kong::Client.instance).to receive(:get).with("/consumers/:id/oauth2")
+      allow(Kong::Client.instance).to receive(:get).with("/consumers/:id/oauth2",  { size: 9999999 })
         .and_return({ 'data' => [{ 'id' => '123456', 'name' => 'my app' }] })
       result = subject.oauth_apps
       expect(result.first.is_a?(Kong::OAuthApp)).to be_truthy
@@ -38,7 +38,7 @@ describe Kong::Consumer do
     context 'when custom_id is set' do
       it 'requests oauth2_tokens assigned to consumer' do
         subject.custom_id = 'custom_id'
-        expect(Kong::OAuth2Token).to receive(:list).with({ authenticated_userid: subject.custom_id })
+        expect(Kong::OAuth2Token).to receive(:list).with({ authenticated_userid: subject.custom_id }, { client: Kong::Client.instance })
         subject.oauth2_tokens
       end
     end
@@ -56,14 +56,14 @@ describe Kong::Consumer do
   describe '#acls' do
     it 'requests consumer\'s acls' do
       subject.id = ':id'
-      expect(Kong::Client.instance).to receive(:get).with("/consumers/:id/acls")
+      expect(Kong::Client.instance).to receive(:get).with("/consumers/:id/acls",  { size: 9999999 })
         .and_return({ 'data' => [{ 'id' => '123456', 'group' => 'group1' }] })
       subject.acls
     end
 
     it 'returns list of Acls' do
       subject.id = ':id'
-      allow(Kong::Client.instance).to receive(:get).with("/consumers/:id/acls")
+      allow(Kong::Client.instance).to receive(:get).with("/consumers/:id/acls",  { size: 9999999 })
         .and_return({ 'data' => [{ 'id' => '123456', 'group' => 'group1' }] })
       result = subject.acls
       expect(result.first.is_a?(Kong::Acl)).to be_truthy

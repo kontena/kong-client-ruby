@@ -5,19 +5,19 @@ module Kong
     end
 
     def self.info
-      Client.instance.get('/')
+      Client.instance.info
     end
 
     def self.status
-      Client.instance.get('/status')
+      Client.instance.status
     end
 
     def self.cluster
-      Client.instance.get('/cluster')
+      Client.instance.cluster
     end
 
     def self.remove_node(name)
-      Client.instance.delete("/cluster/nodes/#{name}")
+      Client.instance.remove_node(name)
     end
   end
 end

@@ -13,7 +13,7 @@ module Kong
     ##
     # @return [Array<Kong::Plugin>]
     def plugins
-      Plugin.list({ api_id: self.id })
+      Plugin.list({ api_id: self.id }, client: self.client)
     end
   end
 end

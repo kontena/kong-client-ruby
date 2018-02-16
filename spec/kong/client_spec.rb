@@ -10,6 +10,24 @@ describe Kong::Client do
     spy
   end
 
+  describe '.api_url=' do
+    it 'updates api_url attribute' do
+      described_class.api_url = 'http://kong-api:8001'
+      expect(described_class.api_url).to eq('http://kong-api:8001')
+    end
+
+    it 'updates client instance' do
+      described_class.api_url = 'http://kong-api:8001'
+      expect(described_class.instance.api_url).to eq('http://kong-api:8001')
+    end
+  end
+
+  describe '.instance' do
+    it 'returns shared instance' do
+      expect(described_class.instance.is_a?(described_class)).to be_truthy
+    end
+  end
+
   describe '#initialize' do
     it 'initializes Excon with Kong URI' do
       described_class.api_url = nil
@@ -67,16 +85,74 @@ describe Kong::Client do
     end
   end
 
+  describe '#consumers' do
+    it 'returns Collection object for Kong::Consumer' do
+      expect(Kong::Collection).to receive(:new).with(Kong::Consumer, subject).and_call_original
+      subject.consumers
+    end
+  end
+
+  describe '#apis' do
+    it 'returns Collection object for Kong::Api' do
+      expect(Kong::Collection).to receive(:new).with(Kong::Api, subject).and_call_original
+      subject.apis
+    end
+  end
+
+  describe '#oauth_apps' do
+    it 'returns Collection object for Kong::OAuthApp' do
+      expect(Kong::Collection).to receive(:new).with(Kong::OAuthApp, subject).and_call_original
+      subject.oauth_apps
+    end
+  end
+
+  describe '#oauth2_tokens' do
+    it 'returns Collection object for Kong::OAuth2Token' do
+      expect(Kong::Collection).to receive(:new).with(Kong::OAuth2Token, subject).and_call_original
+      subject.oauth2_tokens
+    end
+  end
+
+  describe '#plugins' do
+    it 'returns Collection object for Kong::Plugin' do
+      expect(Kong::Collection).to receive(:new).with(Kong::Plugin, subject).and_call_original
+      subject.plugins
+    end
+  end
+
+  describe '#targets' do
+    it 'returns Collection object for Kong::Target' do
+      expect(Kong::Collection).to receive(:new).with(Kong::Target, subject).and_call_original
+      subject.targets
+    end
+  end
+
+  describe '#info' do
+    it 'request root endpoint' do
+      expect(subject).to receive(:get).with('/')
+      subject.info
+    end
+  end
+
+  describe '#status' do
+    it 'request status endpoint' do
+      expect(subject).to receive(:get).with('/status')
+      subject.status
+    end
+  end
+
+  describe '#cluster' do
+    it 'request cluster endpoint' do
+      expect(subject).to receive(:get).with('/cluster')
+      subject.cluster
+    end
+  end
+
   describe '#get' do
     before(:each) do
       allow(subject).to receive(:http_client).and_return(http_client)
     end
     it 'creates HTTP GET request with given params' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(200)
       expect(http_client).to receive(:get).and_return(response)
@@ -84,11 +160,6 @@ describe Kong::Client do
     end
 
     it 'raises Kong::Error if request returns error' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(403)
       expect(http_client).to receive(:get).and_return(response)
@@ -98,11 +169,6 @@ describe Kong::Client do
     end
 
     it 'parses response JSON' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(200)
       allow(response).to receive(:body).and_return({ id: '12345' }.to_json)
@@ -112,11 +178,6 @@ describe Kong::Client do
     end
 
     it 'returns response text' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(200)
       allow(response).to receive(:body).and_return('<html></html>')
@@ -131,11 +192,6 @@ describe Kong::Client do
       allow(subject).to receive(:http_client).and_return(http_client)
     end
     it 'creates HTTP POST request with given params' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(200)
       expect(http_client).to receive(:post).and_return(response)
@@ -144,11 +200,6 @@ describe Kong::Client do
 
 
     it 'raises Kong::Error if request returns error' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(403)
       expect(http_client).to receive(:post).and_return(response)
@@ -158,11 +209,6 @@ describe Kong::Client do
     end
 
     it 'parses response JSON' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(200)
       allow(response).to receive(:body).and_return({ id: '12345' }.to_json)
@@ -176,11 +222,6 @@ describe Kong::Client do
       allow(subject).to receive(:http_client).and_return(http_client)
     end
     it 'creates HTTP PATCH request with given params' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(200)
       expect(http_client).to receive(:patch).and_return(response)
@@ -189,11 +230,6 @@ describe Kong::Client do
 
 
     it 'raises Kong::Error if request returns error' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(403)
       expect(http_client).to receive(:patch).and_return(response)
@@ -203,11 +239,6 @@ describe Kong::Client do
     end
 
     it 'parses response JSON' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(200)
       allow(response).to receive(:body).and_return({ id: '12345' }.to_json)
@@ -222,11 +253,6 @@ describe Kong::Client do
       allow(subject).to receive(:http_client).and_return(http_client)
     end
     it 'creates HTTP PUT request with given params' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(200)
       expect(http_client).to receive(:put).and_return(response)
@@ -235,11 +261,6 @@ describe Kong::Client do
 
 
     it 'raises Kong::Error if request returns error' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(403)
       expect(http_client).to receive(:put).and_return(response)
@@ -249,11 +270,6 @@ describe Kong::Client do
     end
 
     it 'parses response JSON' do
-      http_client_params = {
-        path: 'path',
-        query: { key: 'value' },
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(200)
       allow(response).to receive(:body).and_return({ id: '12345' }.to_json)
@@ -268,11 +284,6 @@ describe Kong::Client do
       allow(subject).to receive(:http_client).and_return(http_client)
     end
     it 'creates HTTP DELETE request with given params' do
-      http_client_params = {
-        path: 'path',
-        query: {},
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(204)
       expect(http_client).to receive(:delete).and_return(response)
@@ -281,11 +292,6 @@ describe Kong::Client do
 
 
     it 'raises Kong::Error if request returns other than 204' do
-      http_client_params = {
-        path: 'path',
-        query: {},
-        headers: {}
-      }
       response = spy
       allow(response).to receive(:status).and_return(403)
       expect(http_client).to receive(:delete).and_return(response)

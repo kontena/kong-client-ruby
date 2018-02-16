@@ -4,36 +4,46 @@ module Kong
 
       # List resources
       # @return [Array]
-      def list(params = {})
+      def list(params = {}, opts = {})
+        opts = {} if opts.nil?
+        client = opts[:client] ? opts[:client] : Client.instance
+        collection = opts[:collection] ? opts[:collection] : Collection.new(self, client)
+        api_end_point = opts[:api_end_point] ? opts[:api_end_point] : self::API_END_POINT
         result = []
-        json_data = Client.instance.get(self::API_END_POINT, params)
+        json_data = client.get(api_end_point, params)
         if json_data['data']
           json_data['data'].each do |instance|
-            result << self.new(instance)
+            result << self.new(instance, { client: client, collection: collection })
           end
         end
         result
       end
 
-      alias_method :all, :list
+      def all(params = {}, opts = {})
+        self.list({ size: 9999999 }, opts)
+      end
+
+      def first(opts={})
+        self.list({},opts).first
+      end
 
       # Create resource
       # @param [Hash] attributes
-      def create(attributes = {})
-        self.new(attributes).create
+      def create(attributes = {}, opts = {})
+        self.new(attributes, opts).create
       end
 
       # Find resource
       # @param [String] id
-      def find(id)
-        self.new.get(id)
+      def find(id, opts = {})
+        self.new({}, opts).get(id)
       end
 
       def method_missing(method, *arguments, &block)
         if method.to_s.start_with?('find_by_')
           attribute = method.to_s.sub('find_by_', '')
           if self.attribute_names.include?(attribute)
-            self.list({ attribute => arguments[0] })[0]
+            self.list({ attribute => arguments[0] }, arguments[1])[0]
           else
             super
           end
@@ -57,6 +67,7 @@ module Kong
     end
 
     attr_accessor :attributes, :api_end_point
+    attr_reader :client, :collection
 
     def self.included(base)
       base.extend(ClassMethods)
@@ -72,17 +83,12 @@ module Kong
 
     ##
     # @param [Hash] attributes
-    def initialize(attributes = {})
+    def initialize(attributes = {}, opts = {})
+      @client = opts[:client] ? opts[:client] : Client.instance
+      @collection = opts[:collection] ? opts[:collection] : Collection.new(self.class, @client)
       init_api_end_point
       init_attributes(attributes)
     end
-
-    # Get Kong API client
-    # @return [Kong::Client]
-    def client
-      Client.instance
-    end
-
 
     # Get resource
     # @param [String] key
@@ -104,13 +110,30 @@ module Kong
       self.id.nil?
     end
 
+    def set(attributes)
+      self.attributes = attributes
+      self.attributes
+    end
+
+    def to_s
+      self.attributes.to_s
+    end
+
+    def to_json
+      self.attributes.to_json
+    end
+
+    def inspect
+      self.attributes.inspect
+    end
     # Save resource to Kong
     def save
       create_or_update
     end
 
     # Create resource
-    def create
+    def create(attributes = {})
+      attributes = self.attributes.merge(attributes)
       headers = { 'Content-Type' => 'application/x-www-form-urlencoded' }
       response = client.post(@api_end_point, nil, attributes, headers)
       init_attributes(response)
@@ -156,8 +179,12 @@ module Kong
 
     def init_attributes(attributes)
       @attributes = {}
+      self.attributes = attributes
+    end
+
+    def attributes=(attributes)
       attributes.each do |key, value|
-        @attributes[key.to_s] = value
+        @attributes[key.to_s] = value if self.class.attribute_names.include?(key.to_s)
       end
       use_consumer_end_point if respond_to?(:use_consumer_end_point)
       use_api_end_point if respond_to?(:use_api_end_point)

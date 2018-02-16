@@ -1,20 +1,14 @@
 module Kong
   class Target
     include Base
+    include Rootless
 
     ATTRIBUTE_NAMES = %w(id upstream_id target weight).freeze
     API_END_POINT = '/targets/'.freeze
 
-    def self.find(id)
-      raise NotImplementedError, 'Kong does not support direct access to targets, you must go via an upstream'
-    end
 
-    def self.list(params = {})
-      raise NotImplementedError, 'Kong does not support direct access to targets, you must go via an upstream'
-    end
-
-    def initialize(attributes = {})
-      super(attributes)
+    def initialize(attributes = {}, opts = {})
+      super(attributes, opts)
       raise ArgumentError, 'You must specify an upstream_id' unless self.upstream_id
     end
 
@@ -41,7 +35,7 @@ module Kong
     # Get Upstream resource
     # @return [Kong::Upstream]
     def upstream
-      @upstream ||= Upstream.find(self.upstream_id)
+      @upstream ||= Upstream.find(self.upstream_id, client: self.client)
     end
 
     # Set Upstream resource
