@@ -1,3 +1,5 @@
+require_relative './util'
+
 module Kong
   class Plugin
     include Base
@@ -8,24 +10,22 @@ module Kong
 
     # Create resource
     def create
-      if attributes['config']
-        attributes['config'].each do |key, value|
-          attributes["config.#{key}"] = value
-        end
-        attributes.delete('config')
-      end
+      flatten_config
       super
     end
 
     # update resource
     def update
-      if attributes['config']
-        attributes['config'].each do |key, value|
-          attributes["config.#{key}"] = value
-        end
-        attributes.delete('config')
-      end
+      flatten_config
       super
+    end
+
+    private
+
+    def flatten_config
+      if attributes['config']
+        attributes.merge!(Util.flatten(attributes.delete('config'), 'config'))
+      end
     end
   end
 end
