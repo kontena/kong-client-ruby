@@ -94,18 +94,18 @@ describe Kong::Base do
 
   describe '#create' do
     it 'creates POST /:resource_end_point/ request with resource attributes' do
-      headers = { 'Content-Type' => 'application/x-www-form-urlencoded' }
+      headers = { 'Content-Type' => 'application/json' }
       attributes = { 'name' => 'test object' }
-      expect(Kong::Client.instance).to receive(:post).with('/resources/', nil, attributes, headers)
+      expect(Kong::Client.instance).to receive(:post).with('/resources/', attributes, nil, headers)
         .and_return(attributes)
       subject.name = 'test object'
       subject.create
     end
 
     it 'returns resource instance' do
-      headers = { 'Content-Type' => 'application/x-www-form-urlencoded' }
+      headers = { 'Content-Type' => 'application/json' }
       attributes = { 'name' => 'test object' }
-      allow(Kong::Client.instance).to receive(:post).with('/resources/', nil, attributes, headers)
+      allow(Kong::Client.instance).to receive(:post).with('/resources/', attributes, nil, headers)
         .and_return(attributes.merge({ 'id' => '12345' }))
       subject.name = 'test object'
       expect(subject.create).to eq(subject)
@@ -134,19 +134,19 @@ describe Kong::Base do
 
     describe '#update' do
       it 'creates PATCH /:resource_end_point/:resource_id request with resource attributes' do
-        headers = { 'Content-Type' => 'application/x-www-form-urlencoded' }
+        headers = { 'Content-Type' => 'application/json' }
         subject.id = '12345'
         subject.name = 'test object'
-        expect(Kong::Client.instance).to receive(:patch).with('/resources/12345', nil, subject.attributes, headers)
+        expect(Kong::Client.instance).to receive(:patch).with('/resources/12345', subject.attributes, nil, headers)
           .and_return(subject.attributes)
         subject.update
       end
 
       it 'returns resource instance' do
-        headers = { 'Content-Type' => 'application/x-www-form-urlencoded' }
+        headers = { 'Content-Type' => 'application/json' }
         subject.id = '12345'
         subject.name = 'test object'
-        allow(Kong::Client.instance).to receive(:patch).with('/resources/12345', nil, subject.attributes, headers)
+        allow(Kong::Client.instance).to receive(:patch).with('/resources/12345', subject.attributes, nil, headers)
           .and_return(subject.attributes)
         expect(subject.update).to eq(subject)
       end

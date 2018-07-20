@@ -111,8 +111,8 @@ module Kong
 
     # Create resource
     def create
-      headers = { 'Content-Type' => 'application/x-www-form-urlencoded' }
-      response = client.post(@api_end_point, nil, attributes, headers)
+      headers = { 'Content-Type' => 'application/json' }
+      response = client.post(@api_end_point, attributes, nil, headers)
       init_attributes(response)
       self
     end
@@ -121,15 +121,15 @@ module Kong
     # Data is sent to Kong in JSON format and HTTP PUT request is used
     def create_or_update
       headers = { 'Content-Type' => 'application/json' }
-      response = client.put("#{@api_end_point}", attributes, nil, headers)
+      response = client.put(@api_end_point, attributes, nil, headers)
       init_attributes(response)
       self
     end
 
     # Update resource
     def update
-      headers = { 'Content-Type' => 'application/x-www-form-urlencoded' }
-      response = client.patch("#{@api_end_point}#{self.id}", nil, attributes, headers)
+      headers = { 'Content-Type' => 'application/json' }
+      response = client.patch("#{@api_end_point}#{self.id}", attributes, nil, headers)
       init_attributes(response)
       self
     end
