@@ -34,9 +34,9 @@ describe Kong::Plugin do
     end
 
     it 'transforms nested config keys to config.key format' do
-      headers = { 'Content-Type' => 'application/x-www-form-urlencoded' }
+      headers = { 'Content-Type' => 'application/json' }
       attributes = { 'api_id' => ':api_id', 'config.anonymous' => '12345', 'config.first.second' => '1' }
-      expect(Kong::Client.instance).to receive(:post).with('/apis/:api_id/plugins/', nil, attributes, headers).and_return(attributes)
+      expect(Kong::Client.instance).to receive(:post).with('/apis/:api_id/plugins/', attributes, nil, headers).and_return(attributes)
       subject = described_class.new({ api_id: ':api_id', config: { 'anonymous' => '12345', 'first' => { 'second' => '1' } } })
       subject.create
     end
@@ -52,9 +52,9 @@ describe Kong::Plugin do
     end
 
     it 'transforms nested config keys to config.key format' do
-      headers = { 'Content-Type' => 'application/x-www-form-urlencoded' }
+      headers = { 'Content-Type' => 'application/json' }
       attributes = { 'api_id' => ':api_id', 'config.anonymous' => '12345', 'config.first.second' => '1' }
-      expect(Kong::Client.instance).to receive(:patch).with('/apis/:api_id/plugins/', nil, attributes, headers).and_return(attributes)
+      expect(Kong::Client.instance).to receive(:patch).with('/apis/:api_id/plugins/', attributes, nil, headers).and_return(attributes)
       subject = described_class.new({ api_id: ':api_id', config: { 'anonymous' => '12345', 'first' => { 'second' => '1' } } })
       subject.update
     end

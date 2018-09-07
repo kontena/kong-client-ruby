@@ -46,7 +46,6 @@ module Kong
       @api_url = url
     end
 
-
     # Get request
     #
     # @param [String] path
