@@ -1,24 +1,24 @@
 AllCops:
   DisabledByDefault: true
 
-Style/IndentationConsistency:
+Layout/IndentationConsistency:
   Enabled: true
   AutoCorrect: true
 
-Style/CommentIndentation:
+Layout/CommentIndentation:
   Enabled: true
   AutoCorrect: true
 
 Style/NestedModifier:
   Enabled: true
 
-Style/IndentArray:
+Layout/IndentArray:
   Enabled: true
 
-Style/AlignArray:
+Layout/AlignArray:
   Enabled: true
 
-Style/AlignHash:
+Layout/AlignHash:
   Enabled: true
 
 #Lint/EmptyInterpolation:
@@ -141,7 +141,7 @@ Metrics/MethodLength:
   Max: 40
   Severity: refactor
 
-Style/Tab:
+Layout/Tab:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#tabs
   Enabled: true
 
@@ -152,7 +152,7 @@ Metrics/ParameterLists:
   Max: 5
   CountKeywordArgs: true
 
-Style/IndentationWidth:
+Layout/IndentationWidth:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#tabs
   Enabled: true
 
@@ -161,41 +161,41 @@ Metrics/LineLength:
   Max: 120
   Enabled: false
 
-Style/TrailingWhitespace:
+Layout/TrailingWhitespace:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-trailing-whitespace
   Enabled: true
 
-Style/TrailingBlankLines:
+Layout/TrailingBlankLines:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#end-file-newline
   EnforcedStyle: final_newline
 
-Style/SpaceAroundOperators:
+Layout/SpaceAroundOperators:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
   Enabled: true
   AllowForAlignment: true
 
-Style/SpaceAroundEqualsInParameterDefault:
+Layout/SpaceAroundEqualsInParameterDefault:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
   EnforcedStyle: space
 
-Style/SpaceAfterComma:
+Layout/SpaceAfterComma:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
   Enabled: true
 
-Style/SpaceAfterColon:
+Layout/SpaceAfterColon:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
   Enabled: true
 
-Style/SpaceAfterSemicolon:
+Layout/SpaceAfterSemicolon:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
   Enabled: true
 
-Style/SpaceBeforeBlockBraces:
+Layout/SpaceBeforeBlockBraces:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
   Enabled: true
   EnforcedStyle: space
 
-Style/SpaceInsideBlockBraces:
+Layout/SpaceInsideBlockBraces:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
   Enabled: true
   EnforcedStyle: space
@@ -204,34 +204,34 @@ Style/SpaceInsideBlockBraces:
   # Space between { and |. Overrides EnforcedStyle if there is a conflict.
   SpaceBeforeBlockParameters: true
 
-Style/SpaceInsideHashLiteralBraces:
+Layout/SpaceInsideHashLiteralBraces:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
   Enabled: true
   EnforcedStyle: space
   EnforcedStyleForEmptyBraces: no_space
 
-Style/SpaceInsideStringInterpolation:
+Layout/SpaceInsideStringInterpolation:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#spaces-around-operators
   Enabled: true
   EnforcedStyle: no_space
 
-Style/SpaceInsideParens:
+Layout/SpaceInsideParens:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-spaces-around-delimiters
   Enabled: true
 
-Style/SpaceInsideBrackets:
+Layout/SpaceInsideBrackets:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-spaces-around-delimiters
   Enabled: true
 
-Style/CaseIndentation:
+Layout/CaseIndentation:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#case-indentation
   Enabled: true
 
-Style/ElseAlignment:
+Layout/ElseAlignment:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#case-indentation
   Enabled: true
 
-Style/RescueEnsureAlignment:
+Layout/RescueEnsureAlignment:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#case-indentation
   Enabled: true
 
@@ -240,11 +240,11 @@ Lint/EndAlignment:
   Enabled: true
   AutoCorrect: true
 
-Style/SpaceAfterNot:
+Layout/SpaceAfterNot:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-space-after-not
   Enabled: true
 
-Style/EmptyLineBetweenDefs:
+Layout/EmptyLineBetweenDefs:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#lines-between-defs
   Enabled: true
   AllowAdjacentOneLineDefs: false
@@ -295,10 +295,6 @@ Style/RedundantReturn:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#avoid-return
   Enabled: true
 
-Style/SpaceAroundEqualsInParameterDefault:
-  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#space-around-param-default
-  Enabled: true
-
 Style/PerlBackrefs:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-perlisms
   Enabled: true
@@ -307,7 +303,7 @@ Style/SpecialGlobalVars:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-perlisms
   Enabled: true
 
-Style/SpaceAfterMethodName:
+Layout/SpaceAfterMethodName:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-space-after-method-name
   Enabled: true
 
@@ -325,7 +321,7 @@ Style/ClassVars:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#class-vars
   Enabled: true
 
-Style/AccessModifierIndentation:
+Layout/AccessModifierIndentation:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#access-modifier-indent
   Enabled: true
 
