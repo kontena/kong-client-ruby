@@ -91,7 +91,7 @@ api = Kong::Api.new({
   name: 'Mockbin',
   hosts: ['mockbin.com'],
   uris: ['/someservice'],
-  methods: ['GET']
+  methods: ['GET'],
   strip_uri: false,
   preserve_host: false,
   upstream_url: 'https://mockbin.com'
