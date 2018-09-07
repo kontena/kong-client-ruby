@@ -1,3 +1,10 @@
+# 0.3.3 (2018-09-07)
+- Switch to application json content type ([#28](https://github.com/kontena/kong-client-ruby/pull/28))
+- Flatten nested plugin config items ([#27](https://github.com/kontena/kong-client-ruby/pull/27))
+
+# 0.3.2 (2018-02-05)
+- Remove Excon version dependency ([#25](https://github.com/kontena/kong-client-ruby/pull/25))
+
 # 0.3.1 (2017-10-02)
 - Use consumer id to retrieve auth keys and tokens ([#19](https://github.com/kontena/kong-client-ruby/pull/19))
 - Add methods to kong api base attributes ([#21](https://github.com/kontena/kong-client-ruby/pull/21))
