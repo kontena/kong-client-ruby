@@ -83,7 +83,6 @@ module Kong
       Client.instance
     end
 
-
     # Get resource
     # @param [String] key
     def get(key = nil)

@@ -4,5 +4,5 @@ source 'https://rubygems.org'
 gemspec
 group :development, :test do
   gem "rspec"
-  gem "rubocop", "0.47"
+  gem "rubocop", "~> 0.49.0"
 end

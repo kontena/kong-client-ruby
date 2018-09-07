@@ -88,7 +88,7 @@ module Kong
       end
     end
 
-    # Put request
+    # Patch request
     #
     # @param [String] path
     # @param [Object] obj
@@ -111,7 +111,6 @@ module Kong
         handle_error_response(response)
       end
     end
-
 
     # Put request
     #
