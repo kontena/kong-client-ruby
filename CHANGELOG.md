@@ -1,3 +1,6 @@
+# 0.3.4 (2018-09-12)
+- Re-built gem package
+
 # 0.3.3 (2018-09-07)
 - Switch to application json content type ([#28](https://github.com/kontena/kong-client-ruby/pull/28))
 - Flatten nested plugin config items ([#27](https://github.com/kontena/kong-client-ruby/pull/27))
