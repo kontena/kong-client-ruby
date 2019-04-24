@@ -2,7 +2,7 @@ require_relative "../spec_helper"
 
 describe Kong::OAuthApp do
   let(:valid_attribute_names) do
-    %w(id name client_id client_secret redirect_uri consumer_id)
+    %w(id name client_id client_secret redirect_uri consumer_attrs)
   end
 
   describe '::ATTRIBUTE_NAMES' do

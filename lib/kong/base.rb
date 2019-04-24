@@ -160,6 +160,7 @@ module Kong
       end
       use_consumer_end_point if respond_to?(:use_consumer_end_point)
       use_api_end_point if respond_to?(:use_api_end_point)
+      use_service_end_point if respond_to?(:use_service_end_point)
       use_upstream_end_point if respond_to?(:use_upstream_end_point)
     end
   end

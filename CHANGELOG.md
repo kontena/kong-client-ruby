@@ -1,3 +1,6 @@
+# 0.4.0 (2019-12-17)
+- Support Kong 1.1 ([#38](https://github.com/kontena/kong-client-ruby/pull/38))
+
 # 0.3.4 (2018-09-12)
 - Re-built gem package
 

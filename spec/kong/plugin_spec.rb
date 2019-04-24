@@ -2,7 +2,7 @@ require_relative "../spec_helper"
 
 describe Kong::Plugin do
   let(:valid_attribute_names) do
-    %w(id api_id name config enabled consumer_id)
+    %w(id name config enabled route_id service_id consumer_id protocols tags)
   end
 
   describe 'ATTRIBUTE_NAMES' do
@@ -18,26 +18,26 @@ describe Kong::Plugin do
   end
 
   describe '#init_attributes' do
-    it 'uses correct api end point if api_id is present' do
-      subject = described_class.new({ api_id: ':api_id' })
-      expect(subject.api_end_point).to eq('/apis/:api_id/plugins/')
+    it 'uses correct service end point if service_id is present' do
+      subject = described_class.new({ service_id: ':service_id' })
+      expect(subject.api_end_point).to eq('/services/:service_id/plugins/')
     end
   end
 
   describe '#create' do
     it 'transforms config keys to config.key format' do
       headers = { 'Content-Type' => 'application/json' }
-      attributes = { 'api_id' => ':api_id', 'config.anonymous' => '12345' }
-      expect(Kong::Client.instance).to receive(:post).with('/apis/:api_id/plugins/', attributes, nil, headers).and_return(attributes)
-      subject = described_class.new({ api_id: ':api_id', config: { 'anonymous' => '12345' } })
+      attributes = { 'service_id' => ':service_id', 'config.anonymous' => '12345' }
+      expect(Kong::Client.instance).to receive(:post).with('/services/:service_id/plugins/', attributes, nil, headers).and_return(attributes)
+      subject = described_class.new({ service_id: ':service_id', config: { 'anonymous' => '12345' } })
       subject.create
     end
 
     it 'transforms nested config keys to config.key format' do
       headers = { 'Content-Type' => 'application/json' }
-      attributes = { 'api_id' => ':api_id', 'config.anonymous' => '12345', 'config.first.second' => '1' }
-      expect(Kong::Client.instance).to receive(:post).with('/apis/:api_id/plugins/', attributes, nil, headers).and_return(attributes)
-      subject = described_class.new({ api_id: ':api_id', config: { 'anonymous' => '12345', 'first' => { 'second' => '1' } } })
+      attributes = { 'service_id' => ':service_id', 'config.anonymous' => '12345', 'config.first.second' => '1' }
+      expect(Kong::Client.instance).to receive(:post).with('/services/:service_id/plugins/', attributes, nil, headers).and_return(attributes)
+      subject = described_class.new({ service_id: ':service_id', config: { 'anonymous' => '12345', 'first' => { 'second' => '1' } } })
       subject.create
     end
   end
@@ -45,17 +45,17 @@ describe Kong::Plugin do
   describe '#update' do
     it 'transforms config keys to config.key format' do
       headers = { 'Content-Type' => 'application/json' }
-      attributes = { 'api_id' => ':api_id', 'config.anonymous' => '12345' }
-      expect(Kong::Client.instance).to receive(:patch).with('/apis/:api_id/plugins/', attributes, nil, headers).and_return(attributes)
-      subject = described_class.new({ api_id: ':api_id', config: { 'anonymous' => '12345' } })
+      attributes = { 'service_id' => ':service_id', 'config.anonymous' => '12345' }
+      expect(Kong::Client.instance).to receive(:patch).with('/services/:service_id/plugins/', attributes, nil, headers).and_return(attributes)
+      subject = described_class.new({ service_id: ':service_id', config: { 'anonymous' => '12345' } })
       subject.update
     end
 
     it 'transforms nested config keys to config.key format' do
       headers = { 'Content-Type' => 'application/json' }
-      attributes = { 'api_id' => ':api_id', 'config.anonymous' => '12345', 'config.first.second' => '1' }
-      expect(Kong::Client.instance).to receive(:patch).with('/apis/:api_id/plugins/', attributes, nil, headers).and_return(attributes)
-      subject = described_class.new({ api_id: ':api_id', config: { 'anonymous' => '12345', 'first' => { 'second' => '1' } } })
+      attributes = { 'service_id' => ':service_id', 'config.anonymous' => '12345', 'config.first.second' => '1' }
+      expect(Kong::Client.instance).to receive(:patch).with('/services/:service_id/plugins/', attributes, nil, headers).and_return(attributes)
+      subject = described_class.new({ service_id: ':service_id', config: { 'anonymous' => '12345', 'first' => { 'second' => '1' } } })
       subject.update
     end
   end
