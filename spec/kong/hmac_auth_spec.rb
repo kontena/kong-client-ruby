@@ -2,7 +2,7 @@ require_relative "../spec_helper"
 
 describe Kong::HmacAuth do
   let(:valid_attribute_names) do
-    %w(id key consumer_id)
+    %w(id username consumer_id)
   end
 
   describe 'ATTRIBUTE_NAMES' do
