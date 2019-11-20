@@ -24,7 +24,7 @@ describe Kong::Upstream do
       expect(Kong::Client.instance)
         .to receive(:get).with("/upstreams/12345/targets")
         .and_return({
-          'data'  => [{ 'upstream_id' => 12345, 'target' => 'google.com:80', 'weight' => 100 }],
+          'data' => [{ 'upstream_id' => 12345, 'target' => 'google.com:80', 'weight' => 100 }],
           'total' => 1
         })
 
