@@ -12,7 +12,7 @@ Layout/CommentIndentation:
 Style/NestedModifier:
   Enabled: true
 
-Layout/IndentArray:
+Layout/IndentFirstArrayElement:
   Enabled: true
 
 Layout/AlignArray:
@@ -219,7 +219,11 @@ Layout/SpaceInsideParens:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-spaces-around-delimiters
   Enabled: true
 
-Layout/SpaceInsideBrackets:
+Layout/SpaceInsideArrayLiteralBrackets:
+  StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-spaces-around-delimiters
+  Enabled: true
+
+Layout/SpaceInsideReferenceBrackets:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-spaces-around-delimiters
   Enabled: true
 
@@ -235,7 +239,7 @@ Layout/RescueEnsureAlignment:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#case-indentation
   Enabled: true
 
-Lint/EndAlignment:
+Layout/EndAlignment:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#case-indentation
   Enabled: true
   AutoCorrect: true
@@ -307,11 +311,11 @@ Layout/SpaceAfterMethodName:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#no-space-after-method-name
   Enabled: true
 
-Style/VariableName:
+Naming/VariableName:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#variable-names
   Enabled: true
 
-Style/ConstantName:
+Naming/ConstantName:
   StyleGuide: https://github.com/backupify/backupify_styleguides/blob/master/RubyStyleguide.md#constant-names
   Enabled: true
 
