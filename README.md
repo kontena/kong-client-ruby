@@ -53,7 +53,7 @@ consumer = Kong::Consumer.find_by_custom_id('custom_id')
 
 ### All Resources and Actions
 
-To see the complete Kong Admin API documentation, please visit: https://getkong.org/docs/0.11.x/admin-api/
+To see the complete Kong Admin API documentation, please visit: https://getkong.org/docs/1.1.x/admin-api/
 
 #### Consumer
 
@@ -80,30 +80,57 @@ consumer.oauth2_tokens
 
 #### API
 
-```ruby
-Kong::Api.list(filters)
-Kong::Api.all()
-Kong::Api.find(id)
-Kong::Api.find_by_*(value)
-Kong::Api.create(attributes)
+Starting Kong 0.14 API resources are split into Services and Routes. A Route it attached to a
+Service. Kong 1.x no longer supports API resources.
 
-api = Kong::Api.new({
+#### Service
+
+```ruby
+Kong::Service.list(filters)
+Kong::Service.all()
+Kong::Service.find(id)
+Kong::Service.find_by_*(value)
+Kong::Service.create(attributes)
+
+service = Kong::Service.new({
   name: 'Mockbin',
-  hosts: ['example.com'],
+  protocol: 'https',
+  host: 'mockbin.com', # upstream
+  path: '/someremoteservice'
+})
+service.get # reloads resource
+service.create
+service.update
+service.save # requests create_or_update action
+service.delete
+
+service.plugins
+```
+
+#### Route
+
+```ruby
+Kong::Route.list(filters)
+Kong::Route.all()
+Kong::Route.find(id)
+Kong::Route.find_by_*(value)
+Kong::Route.create(attributes)
+
+route = Kong::Route.new({
+  name: 'Mockbin',
+  service_id: '5fd1z584-1adb-40a5-c042-63b19db49x21',
   uris: ['/someservice'],
   methods: ['GET'],
-  strip_uri: false,
-  preserve_host: false,
-  upstream_url: 'https://mockbin.com'
+  strip_path: false,
+  preserve_host: false
 })
-api.get # reloads resource
-api.create
-api.update
-api.save # requests create_or_update action
-api.delete
-
-api.plugins
+route.get # reloads resource
+route.create
+route.update
+route.save # requests create_or_update action
+route.delete
 ```
+
 
 #### Plugin
 
@@ -115,7 +142,7 @@ Kong::Plugin.find_by_*(value)
 Kong::Plugin.create(attributes)
 
 plugin = Kong::Plugin.new({
-  api_id: '5fd1z584-1adb-40a5-c042-63b19db49x21',
+  service_id: '5fd1z584-1adb-40a5-c042-63b19db49x21',
   consumer_id: 'a3dX2dh2-1adb-40a5-c042-63b19dbx83hF4',
   name: 'rate-limiting',
   config: {

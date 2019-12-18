@@ -3,9 +3,12 @@ require_relative './util'
 module Kong
   class Plugin
     include Base
-    include BelongsToApi
+    include BelongsToService
 
-    ATTRIBUTE_NAMES = %w(id api_id name config enabled consumer_id).freeze
+    ATTRIBUTE_NAMES = %w(
+      id name config enabled route_id service_id consumer_id protocols
+      tags
+    ).freeze
     API_END_POINT = '/plugins/'.freeze
 
     # Create resource

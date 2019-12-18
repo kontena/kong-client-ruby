@@ -2,7 +2,7 @@ require_relative "../spec_helper"
 
 describe Kong::HmacAuth do
   let(:valid_attribute_names) do
-    %w(id username consumer_id)
+    %w(id username consumer)
   end
 
   describe 'ATTRIBUTE_NAMES' do
@@ -19,7 +19,7 @@ describe Kong::HmacAuth do
 
   describe '#init_attributes' do
     it 'uses correct api end point if api_id is present' do
-      subject = described_class.new({ consumer_id: ':consumer_id' })
+      subject = described_class.new({ consumer: Kong::Consumer.new(id: ':consumer_id') })
       expect(subject.api_end_point).to eq('/consumers/:consumer_id/hmac-auth/')
     end
   end
