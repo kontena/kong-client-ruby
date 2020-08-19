@@ -14,7 +14,13 @@ module Kong
       super
     end
 
-    # update resource
+    # Create or update resource
+    def create_or_update
+      flatten_config
+      super
+    end
+
+    # Update resource
     def update
       flatten_config
       super

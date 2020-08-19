@@ -42,6 +42,24 @@ describe Kong::Plugin do
     end
   end
 
+  describe '#create_or_update' do
+    it 'transforms config keys to config.key format' do
+      headers = { 'Content-Type' => 'application/json' }
+      attributes = { 'api_id' => ':api_id', 'config.anonymous' => '12345' }
+      expect(Kong::Client.instance).to receive(:put).with('/apis/:api_id/plugins/', attributes, nil, headers).and_return(attributes)
+      subject = described_class.new({ api_id: ':api_id', config: { 'anonymous' => '12345' } })
+      subject.create_or_update
+    end
+
+    it 'transforms nested config keys to config.key format' do
+      headers = { 'Content-Type' => 'application/json' }
+      attributes = { 'api_id' => ':api_id', 'config.anonymous' => '12345', 'config.first.second' => '1' }
+      expect(Kong::Client.instance).to receive(:put).with('/apis/:api_id/plugins/', attributes, nil, headers).and_return(attributes)
+      subject = described_class.new({ api_id: ':api_id', config: { 'anonymous' => '12345', 'first' => { 'second' => '1' } } })
+      subject.create_or_update
+    end
+  end
+
   describe '#update' do
     it 'transforms config keys to config.key format' do
       headers = { 'Content-Type' => 'application/json' }
