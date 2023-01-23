@@ -2,7 +2,7 @@ require_relative "../spec_helper"
 
 describe Kong::Acl do
   let(:valid_attribute_names) do
-    %w(id group consumer_id)
+    %w(id group tags consumer_id)
   end
 
   describe '::ATTRIBUTE_NAMES' do
