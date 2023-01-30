@@ -37,6 +37,13 @@ module Kong
           else
             super
           end
+        elsif method.to_s.start_with?('find_all_by_')
+          attribute = method.to_s.sub('find_all_by_', '')
+          if self.attribute_names.include?(attribute)
+            self.list({ attribute => arguments[0] })
+          else
+            super
+          end
         else
           super
         end
@@ -45,6 +52,13 @@ module Kong
       def respond_to?(method, include_private = false)
         if method.to_s.start_with?('find_by_')
           attribute = method.to_s.sub('find_by_', '')
+          if self.attribute_names.include?(attribute)
+            return true
+          else
+            super
+          end
+        elsif method.to_s.start_with?('find_all_by_')
+          attribute = method.to_s.sub('find_all_by_', '')
           if self.attribute_names.include?(attribute)
             return true
           else

@@ -51,11 +51,19 @@ describe Kong::Base do
       it 'will respond to find_by_* methods' do
         expect(Klass.respond_to?(:find_by_name)).to be_truthy
       end
+
+      it 'will respond to find_all_by_* methods' do
+        expect(Klass.respond_to?(:find_all_by_name)).to be_truthy
+      end
     end
 
     context 'when attribute does not exit' do
       it 'will not respond to find_by_* methods' do
         expect(Klass.respond_to?(:find_by_invalid)).to be_falsey
+      end
+
+      it 'will not respond to find_all_by_* methods' do
+        expect(Klass.respond_to?(:find_all_by_invalid)).to be_falsey
       end
     end
   end
