@@ -263,7 +263,7 @@ consumer.jwts
 
 acl = Kong::Acl.new({
   consumer_id: 'a3dX2dh2-1adb-40a5-c042-63b19dbx83hF4',
-  group: 'group1',,
+  group: 'group1',
   tags: ["tag1", "tag2"]
 })
 
